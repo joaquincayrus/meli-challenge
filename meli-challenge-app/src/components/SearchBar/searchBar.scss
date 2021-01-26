@@ -1,0 +1,46 @@
+.search-bar {
+    background-color: #FFE600;
+    height: 60px;
+    .center {
+        margin: auto;
+        width: 90%;
+        height: 100%;
+        .logo {
+            width: 50px;
+            vertical-align: middle;
+            margin-right: 25px;
+        }
+        .helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .borderless-outlineless {
+            border: none;
+            outline: none;
+        }
+        input {
+           width: calc(100% - 140px);
+           padding: 10px;
+            height: 18px;
+            vertical-align: middle;
+        }
+        ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #999999;
+            size: 18px;
+            /* Firefox */
+        }
+        button{
+            padding: 7px;
+            vertical-align: middle;
+            width: 40px;
+            height: 38px;
+            background-color: #eee;
+            .search-icon {
+                vertical-align: middle;
+                filter: invert(17%) sepia(19%) saturate(5%) hue-rotate(35deg) brightness(97%) contrast(90%);
+            }
+        }
+    }
+}
