@@ -10,13 +10,16 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "meli-challenge-models": "file:../meli-challenge-models"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npm run update-models-windows && react-scripts start",
+    "build": "npm run update-models-windows && react-scripts build",
+    "test": "npm run update-models-windows && react-scripts test",
+    "eject": "npm run update-models-windows && react-scripts eject",
+    "update-models-mac": "rm -rf node_module\\meli-challenge-models && npm install",
+    "update-models-windows": "rmdir /S /Q node_modules\\meli-challenge-models && npm install"
   },
   "eslintConfig": {
     "extends": [

@@ -1,0 +1,20 @@
+{
+  "name": "meli-challenge-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run update-models-windows && node index.js",
+    "start-mac": "npm run update-models-mac && node index.js",
+    "update-models-mac": "rm -rf node_module\\meli-challenge-models && npm install",
+    "update-models-windows": "rmdir /S /Q node_modules\\meli-challenge-models && npm install"
+  },
+  "author": "Joaquin Cayrus",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "meli-challenge-models": "file:../meli-challenge-models"
+  }
+}

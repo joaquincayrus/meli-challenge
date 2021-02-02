@@ -3,6 +3,10 @@ import './homeFeed.scss';
 import SearchItemCard from './SearchItemCard/searchItemCard';
 import ItemDetailCard from './ItemDetailCard/itemDetailCard';
 
+import Item from 'meli-challenge-models';
+
+const item = new Item();
+
 class HomeFeed extends React.Component {
     render() {
         return (
