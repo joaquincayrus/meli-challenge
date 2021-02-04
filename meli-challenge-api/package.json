@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run update-models-windows && node index.js",
-    "start-mac": "npm run update-models-mac && node index.js",
+    "start": "npm run update-models-windows && tsc && node index.js",
+    "start-mac": "npm run update-models-mac && tsc && node index.js",
     "update-models-mac": "rm -rf node_module\\meli-challenge-models && npm install",
-    "update-models-windows": "rmdir /S /Q node_modules\\meli-challenge-models && npm install"
+    "update-models-windows": "rmdir /S /Q node_modules\\meli-challenge-models && npm install",
+    "tsc": "tsc"
   },
   "author": "Joaquin Cayrus",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^4.17.11",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "meli-challenge-models": "file:../meli-challenge-models"
+    "meli-challenge-models": "file:../meli-challenge-models",
+    "typescript": "^4.1.3"
   }
 }
