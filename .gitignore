@@ -105,9 +105,9 @@ dist
 
 # ENV
 /meli-challenge-api/.env
-meli-challenge-api/index.js
-meli-challenge-models/index.js
-meli-challenge-models/index.js
+/meli-challenge-api/index.js
+/meli-challenge-models/index.js
+/meli-challenge-models/index.js
 meli-challenge-models/src/item-feed.js
-.gitignore
-meli-challenge-models/src/price.js
+/meli-challenge-models/src/price.js
+/meli-challenge-models/src/item-feed.js
