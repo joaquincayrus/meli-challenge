@@ -5,9 +5,9 @@ class Item {
         this.id = id;
         this.title = title;
         this.price = new Price(currency, amount, decimals);
-        this.picture = picture,
-            this.condition = condition,
-            this.free_shipping = free_shipping
+        this.picture = picture;
+        this.condition = condition;
+        this.free_shipping = free_shipping;
     }
     id: string;
     title: string;
