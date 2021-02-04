@@ -2,7 +2,7 @@ import React from 'react';
 import './itemDetailCard.scss';
 
 class ItemDetailCard extends React.Component {
-    render() {
+    render(): any {
         return (
             <div className='card'>
                 DETAIL CARD

@@ -5,19 +5,19 @@ import search from '../../assets/ic_Search.png';
 
 const PLACHOLDER = 'Nunca dejes de buscar';
 
-class SearchBar extends React.Component {
-    constructor(props) {
-        super();
+class SearchBar extends React.Component<{}, { searchBoxValue: string }> {
+    constructor(props: any) {
+        super(props);
         this.state = {
             searchBoxValue: '',
         }
     }
-    render() {
+    render(): any {
         return (
             <div className='search-bar'>
                 <div className='center'>
                     <span className='helper'></span>
-                    <img src={logo} className='logo' />
+                    <img src={logo} className='logo' alt='logo' />
                     <input type='text' placeholder={PLACHOLDER} className='borderless-outlineless'
                         value={this.state.searchBoxValue}
                         onChange={(event) =>
@@ -27,7 +27,7 @@ class SearchBar extends React.Component {
                     </input>
                     <button className='borderless-outlineless' onClick={() => { alert(this.state.searchBoxValue); }}>
                         <span className='helper'></span>
-                        <img src={search} className='search-icon' />
+                        <img src={search} className='search-icon' alt='search icon' />
                     </button>
                 </div>
             </div >

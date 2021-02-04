@@ -1,7 +1,6 @@
 import React from 'react';
 import SearchBar from './components/SearchBar/searchBar';
 import HomeFeed from './components/HomeFeed/homeFeed';
-import * as models from 'meli-challenge-models';
 
 class App extends React.Component {
     render() {
