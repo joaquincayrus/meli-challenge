@@ -19,10 +19,11 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "npm run update-models-windows && react-scripts start",
+    "start": "react-scripts start",
     "build": "npm run update-models-windows && react-scripts build",
     "test": "npm run update-models-windows && react-scripts test",
     "eject": "npm run update-models-windows && react-scripts eject",
+    "update-models-start": "npm run update-models-windows && react-scripts start",
     "update-models-mac": "rm -rf node_module\\meli-challenge-models && npm install",
     "update-models-windows": "rmdir /S /Q node_modules\\meli-challenge-models && npm install"
   },

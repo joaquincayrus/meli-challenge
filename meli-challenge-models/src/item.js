@@ -9,9 +9,9 @@ var Item = /** @class */ (function () {
         this.id = id;
         this.title = title;
         this.price = new price_1.default(currency, amount, decimals);
-        this.picture = picture,
-            this.condition = condition,
-            this.free_shipping = free_shipping;
+        this.picture = picture;
+        this.condition = condition;
+        this.free_shipping = free_shipping;
     }
     return Item;
 }());

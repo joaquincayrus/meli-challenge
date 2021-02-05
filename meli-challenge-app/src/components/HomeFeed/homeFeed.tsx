@@ -7,13 +7,13 @@ import { Item } from 'meli-challenge-models';
 
 class HomeFeed extends React.Component<{}, { item: Item, searchResults: Item[] }> {
 
-    constructor(props: any) {
+    constructor(props: { item: Item, searchResults: Item[] }) {
         super(props);
         //TODO: 
-
+        const item = new Item('123', '123', 'usd', 123, 2, '123', 'new', 'true');
         this.state = {
             item: props.item,
-            searchResults: props.searchResults
+            searchResults: props.searchResults ? props.searchResults : [item]
         }
     }
 
@@ -22,7 +22,13 @@ class HomeFeed extends React.Component<{}, { item: Item, searchResults: Item[] }
             <div className='home-feed'>
                 {/* TODO Search Results */}
                 <div className='center container'>
-                    <SimpleList {...this.state.searchResults} />
+                    <ul>
+                        {this.state.searchResults.map((listItem: Item) => (
+                            <li key={listItem.id}>
+                                <SearchItemCard item={listItem} />
+                            </li>
+                        ))}
+                    </ul>
                     <SearchItemCard />
                     <div className='horizontal-line center'></div>
                     <SearchItemCard />
@@ -38,16 +44,5 @@ class HomeFeed extends React.Component<{}, { item: Item, searchResults: Item[] }
         );
     }
 }
-
-const SimpleList = (list: Item[]): any =>
-    <ul>
-        <>
-            {list.map((listItem: Item) => (
-                <li key={listItem.id}>
-                    <SearchItemCard item={listItem} />
-                </li>
-            ))}
-        </>
-    </ul>;
 
 export default HomeFeed;
