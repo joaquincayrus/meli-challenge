@@ -38,32 +38,48 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require('express');
 var app = express();
+var cors = require('cors');
 var port = 3000;
 var meliChallengeModels = require('meli-challenge-models');
 require('dotenv').config();
+var corsOptions = {
+    origin: 'http://localhost:3001',
+    optionsSuccessStatus: 200 // For legacy browser support
+};
+app.use(cors(corsOptions));
 var Item = meliChallengeModels.Item;
 var Price = meliChallengeModels.Price;
 var ItemFeed = meliChallengeModels.ItemFeed;
 var axios = require('axios');
-app.get('/', function (req, res) {
+app.use(function (_req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Header", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+app.get('/', function (_req, res) {
     res.send('Hello World');
 });
 app.post('/api/items', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, query, meliItem;
+    var result, query, items, itemFeed;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 result = {};
                 query = req.query['q'];
+                items = [];
                 if (!(query !== undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, axios.post(process.env.MELI_SERVICE_ENDPOINT + ":query")];
             case 1:
                 result = _a.sent();
-                meliItem = new Item();
+                result.data.results.map(function (serverItem) {
+                    var meliItem = new Item(serverItem.id, serverItem.title, serverItem.currency_id, serverItem.price, 2, serverItem.thumbnail, serverItem.condition, serverItem.shipping.free_shipping);
+                    items.push(meliItem);
+                });
                 _a.label = 2;
             case 2:
+                itemFeed = new ItemFeed([], items);
                 // res.setHeader('Content-Type', 'application/json');
-                res.json(result.data);
+                res.json(itemFeed);
                 return [2 /*return*/];
         }
     });
