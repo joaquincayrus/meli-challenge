@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "tsc",
+			"path": "meli-challenge-api/",
+			"problemMatcher": [],
+			"label": "npm: tsc - meli-challenge-api",
+			"detail": "tsc"
+		}
+	]
+}

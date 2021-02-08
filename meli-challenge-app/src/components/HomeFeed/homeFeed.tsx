@@ -1,9 +1,8 @@
 import React from 'react';
 import './homeFeed.scss';
 import SearchItemCard from './SearchItemCard/searchItemCard';
-import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, useLocation, Link } from 'react-router-dom';
 import { Item } from 'meli-challenge-models';
-import qs from 'querystring';
 import axios from 'axios';
 
 class HomeFeed extends React.Component<any, {
@@ -19,7 +18,6 @@ class HomeFeed extends React.Component<any, {
     constructor(props: any) {
         super(props);
         //TODO: 
-        const item = new Item('123', '123', 'usd', 123, 2, '123', 'new', 'true');
         // this.state = {
         //     item: props.item,
         //     searchResults: props.searchResults ? props.searchResults : [item]
@@ -49,18 +47,22 @@ class HomeFeed extends React.Component<any, {
     render(): any {
         return (
             <div className='home-feed'>
-                {/* TODO Search Results */}
-                <div className='center container'>
-                    <ul>
-                        {this.state.items.map((listItem: Item) => (
-                            <li key={listItem.id}>
-                                <SearchItemCard item={listItem} />
-                            </li>
-                        ))}
-                    </ul>
-                    <SearchItemCard item={new Item('123', '123', '123123', 123123, 2, 'awedawd', 'new', 'yes')} />
-                    <div className='horizontal-line center'></div>
-                </div>
+                <Router>
+                    {/* TODO Search Results */}
+                    <div className='center container'>
+                        <ul>
+                            {this.state.items.map((listItem: Item) => (
+                                <li key={listItem.id}>
+                                    <Link to={`/items/${listItem.id}`}>
+                                        <SearchItemCard item={listItem} />
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                        <SearchItemCard item={new Item('123', '123', '123123', 123123, 2, 'awedawd', 'new', 'yes')} />
+                        <div className='horizontal-line center'></div>
+                    </div>
+                </Router>
             </div>
         );
     }

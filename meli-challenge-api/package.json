@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run update-models-windows && tsc && node index.js",
+    "start": "npm run update-models-windows && tsc && ts-node index.ts",
     "start-mac": "npm run update-models-mac && tsc && node index.js",
     "update-models-mac": "rm -rf node_module\\meli-challenge-models && npm install",
     "update-models-windows": "rmdir /S /Q node_modules\\meli-challenge-models && npm install",
@@ -20,5 +20,8 @@
     "express": "^4.17.1",
     "meli-challenge-models": "file:../meli-challenge-models",
     "typescript": "^4.1.3"
+  },
+  "devDependencies": {
+    "ts-node": "^9.1.1"
   }
 }

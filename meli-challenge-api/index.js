@@ -50,6 +50,7 @@ app.use(cors(corsOptions));
 var Item = meliChallengeModels.Item;
 var Price = meliChallengeModels.Price;
 var ItemFeed = meliChallengeModels.ItemFeed;
+var ItemDetail = meliChallengeModels.ItemDetail;
 var axios = require('axios');
 app.use(function (_req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -60,7 +61,7 @@ app.get('/', function (_req, res) {
     res.send('Hello World');
 });
 app.post('/api/items', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, query, items, itemFeed;
+    var result, query, items, ruta, itemFeed;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -68,7 +69,8 @@ app.post('/api/items', function (req, res) { return __awaiter(void 0, void 0, vo
                 query = req.query['q'];
                 items = [];
                 if (!(query !== undefined)) return [3 /*break*/, 2];
-                return [4 /*yield*/, axios.post(process.env.MELI_SERVICE_ENDPOINT + ":query")];
+                ruta = "" + process.env.MELI_SERVICE_ENDPOINT;
+                return [4 /*yield*/, axios.post(process.env.MELI_SERVICE_ENDPOINT + "sites/MLA/search?q=:query")];
             case 1:
                 result = _a.sent();
                 result.data.results.map(function (serverItem) {
@@ -84,6 +86,31 @@ app.post('/api/items', function (req, res) { return __awaiter(void 0, void 0, vo
         }
     });
 }); });
+app.get('/api/items/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var result, id, itemDetail, ruta, itemPromise, itemDetailsPromise, _a, promise1, promise2;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                result = {};
+                id = req.params.id;
+                itemDetail = null;
+                if (!(id !== undefined)) return [3 /*break*/, 2];
+                ruta = process.env.MELI_SERVICE_ENDPOINT + "/" + id;
+                itemPromise = axios.get(process.env.MELI_SERVICE_ENDPOINT + "items/" + id);
+                itemDetailsPromise = axios.get(process.env.MELI_SERVICE_ENDPOINT + "items/" + id + "/description");
+                return [4 /*yield*/, Promise.all([itemPromise, itemDetailsPromise])];
+            case 1:
+                _a = _b.sent(), promise1 = _a[0], promise2 = _a[1];
+                res.json([promise1, promise2]);
+                itemDetail = new ItemDetail(promise1.data.id, promise1.data.title, promise1.data.currency_id, promise1.data.price, 2, promise1.data.thumbnail, promise1.data.condition, promise1.data.shipping.free_shipping, 0, promise1.data.desciptions[0]);
+                _b.label = 2;
+            case 2:
+                res.json(itemDetail);
+                return [2 /*return*/];
+        }
+    });
+}); });
 app.listen(port, function () {
     console.log("Example app listening at http://localhost:" + port);
 });
+//# sourceMappingURL=index.js.map

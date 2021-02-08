@@ -25,11 +25,9 @@ class App extends React.Component<any, {}> {
                 <Router>
                     <SearchBar />
                     <Switch>
-                        <Route path="/items" component={HomeFeed}>
-                            {/* <HomeFeed /> */}
-                        </Route>
                         <Route path="/items/:id" component={ItemDetail}>
-                            {/* <ItemDetail /> */}
+                        </Route>
+                        <Route path="/items" component={HomeFeed}>
                         </Route>
                         <Route path="/">
                         </Route>

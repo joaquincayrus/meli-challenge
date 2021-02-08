@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+    //   "runtimeExecutable": "npm",
+    //   "runtimeArgs": ["start"],
+        "program": "${workspaceFolder}/meli-challenge-api/index.ts",
+      "preLaunchTask": "npm: tsc - meli-challenge-api",
+      "outFiles": ["${workspaceFolder}/meli-challenge-api/**/*.js"],
+      "envFile": "${workspaceFolder}/meli-challenge-api/.env"
+    }
+    ]
+}

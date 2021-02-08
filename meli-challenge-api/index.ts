@@ -17,6 +17,7 @@ app.use(cors(corsOptions));
 const Item = meliChallengeModels.Item;
 const Price = meliChallengeModels.Price;
 const ItemFeed = meliChallengeModels.ItemFeed;
+const ItemDetail = meliChallengeModels.ItemDetail;
 
 const axios = require('axios');
 
@@ -36,7 +37,8 @@ app.post('/api/items', async (req: Request, res: Response) => {
 
     const items: any[] = [];
     if (query !== undefined) {
-        result = await axios.post(`${process.env.MELI_SERVICE_ENDPOINT}:query`,)
+        const ruta = `${process.env.MELI_SERVICE_ENDPOINT}`;
+        result = await axios.post(`${process.env.MELI_SERVICE_ENDPOINT}sites/MLA/search?q=:query`,)
 
         result.data.results.map((serverItem: any) => {
             const meliItem = new Item(serverItem.id, serverItem.title, serverItem.currency_id,
@@ -48,6 +50,26 @@ app.post('/api/items', async (req: Request, res: Response) => {
     let itemFeed = new ItemFeed([], items);
     // res.setHeader('Content-Type', 'application/json');
     res.json(itemFeed)
+})
+
+app.get('/api/items/:id', async (req: Request, res: Response) => {
+    let result: any = {};
+    const id = req.params.id;
+
+    let itemDetail: any = null;
+    if (id !== undefined) {
+        const ruta = `${process.env.MELI_SERVICE_ENDPOINT}/${id}`;
+        const itemPromise = axios.get(`${process.env.MELI_SERVICE_ENDPOINT}items/${id}`,);
+        const itemDetailsPromise = axios.get(`${process.env.MELI_SERVICE_ENDPOINT}items/${id}/description`,);
+
+        const [item, itemDescription] = await Promise.all([itemPromise, itemDetailsPromise]);
+
+        res.json([item, itemDescription]);
+        itemDetail = new ItemDetail(item.data.id, item.data.title, item.data.currency_id,
+            item.data.price, 2, item.data.thumbnail, item.data.condition, item.data.shipping.free_shipping,
+            0, itemDescription.data.desciptions[0]);
+    }
+    res.json(itemDetail)
 })
 
 app.listen(port, () => {
