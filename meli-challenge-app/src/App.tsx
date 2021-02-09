@@ -22,17 +22,15 @@ class App extends React.Component<any, {}> {
         // let query = () => { return useQuery() };
         return (
             <div>
-                <Router>
-                    <SearchBar />
-                    <Switch>
-                        <Route path="/items/:id" component={ItemDetail}>
-                        </Route>
-                        <Route path="/items" component={HomeFeed}>
-                        </Route>
-                        <Route path="/">
-                        </Route>
-                    </Switch>
-                </Router>
+                <SearchBar />
+                <Switch>
+                    <Route path="/items/:id" component={ItemDetail}>
+                    </Route>
+                    <Route path="/items" component={HomeFeed}>
+                    </Route>
+                    <Route path="/">
+                    </Route>
+                </Switch>
             </div>
         );
     }

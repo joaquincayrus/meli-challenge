@@ -87,7 +87,7 @@ app.post('/api/items', function (req, res) { return __awaiter(void 0, void 0, vo
     });
 }); });
 app.get('/api/items/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, id, itemDetail, ruta, itemPromise, itemDetailsPromise, _a, promise1, promise2;
+    var result, id, itemDetail, ruta, itemPromise, itemDetailsPromise, _a, item, itemDescription;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -100,9 +100,9 @@ app.get('/api/items/:id', function (req, res) { return __awaiter(void 0, void 0,
                 itemDetailsPromise = axios.get(process.env.MELI_SERVICE_ENDPOINT + "items/" + id + "/description");
                 return [4 /*yield*/, Promise.all([itemPromise, itemDetailsPromise])];
             case 1:
-                _a = _b.sent(), promise1 = _a[0], promise2 = _a[1];
-                res.json([promise1, promise2]);
-                itemDetail = new ItemDetail(promise1.data.id, promise1.data.title, promise1.data.currency_id, promise1.data.price, 2, promise1.data.thumbnail, promise1.data.condition, promise1.data.shipping.free_shipping, 0, promise1.data.desciptions[0]);
+                _a = _b.sent(), item = _a[0], itemDescription = _a[1];
+                res.json([item, itemDescription]);
+                itemDetail = new ItemDetail(item.data.id, item.data.title, item.data.currency_id, item.data.price, 2, item.data.thumbnail, item.data.condition, item.data.shipping.free_shipping, 0, itemDescription.data.desciptions[0]);
                 _b.label = 2;
             case 2:
                 res.json(itemDetail);

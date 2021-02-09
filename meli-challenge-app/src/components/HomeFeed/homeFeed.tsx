@@ -47,22 +47,20 @@ class HomeFeed extends React.Component<any, {
     render(): any {
         return (
             <div className='home-feed'>
-                <Router>
-                    {/* TODO Search Results */}
-                    <div className='center container'>
-                        <ul>
-                            {this.state.items.map((listItem: Item) => (
-                                <li key={listItem.id}>
-                                    <Link to={`/items/${listItem.id}`}>
-                                        <SearchItemCard item={listItem} />
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                        <SearchItemCard item={new Item('123', '123', '123123', 123123, 2, 'awedawd', 'new', 'yes')} />
-                        <div className='horizontal-line center'></div>
-                    </div>
-                </Router>
+                {/* TODO Search Results */}
+                <div className='center container'>
+                    <ul>
+                        {this.state.items.map((listItem: Item) => (
+                            <li key={listItem.id}>
+                                <Link to={`/items/${listItem.id}`}>
+                                    <SearchItemCard item={listItem} />
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    <SearchItemCard item={new Item('123', '123', '123123', 123123, 2, 'awedawd', 'new', 'yes')} />
+                    <div className='horizontal-line center'></div>
+                </div>
             </div>
         );
     }

@@ -26,14 +26,12 @@ class SearchBar extends React.Component<{}, { searchBoxValue: string }> {
                                 searchBoxValue: event.target.value,
                             })}>
                     </input>
-                    <Router>
-                        <Link to={`/items?search=${this.state.searchBoxValue}`}>
-                            <button className='borderless-outlineless'>
-                                <span className='helper'></span>
-                                <img src={search} className='search-icon' alt='search icon' />
-                            </button>
-                        </Link>
-                    </Router>
+                    <Link to={`/items?search=${this.state.searchBoxValue}`} className='borderless-outlineless'>
+                        <button className='borderless-outlineless'>
+                            <span className='helper'></span>
+                            <img src={search} className='search-icon' alt='search icon' />
+                        </button>
+                    </Link>
                 </div>
             </div >
         );
