@@ -1,10 +1,11 @@
 import React from 'react';
 import './homeFeed.scss';
 import SearchItemCard from './SearchItemCard/searchItemCard';
-import { BrowserRouter as Router, useLocation, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Item } from 'meli-challenge-models';
 import axios from 'axios';
-
+import crypto from 'crypto-js';
+const MELI_APP_FRONT = 'Meli App Front End';
 class HomeFeed extends React.Component<any, {
     items: Item[],
     categories: string[],
@@ -37,19 +38,23 @@ class HomeFeed extends React.Component<any, {
     }
 
     getItems = (queryParam: string) => {
-        axios.post(`http://localhost:3000/api/items?q=${queryParam}`)
-            .then(res => {
-                const result = res.data;
-                this.setState({ items: result.items, categories: result.categories, author: result.author });
-            })
+        if (process.env.REACT_APP_MELI_SECRET_KEY !== undefined) {
+            const auth = crypto.AES.encrypt(MELI_APP_FRONT, process.env.REACT_APP_MELI_SECRET_KEY).toString();
+            axios.post(`http://localhost:3000/api/items?q=${queryParam}`, null, { headers: { authorization: auth } })
+                .then(res => {
+                    const result = res.data;
+                    this.setState({ items: result.items, categories: result.categories, author: result.author });
+                })
+        } else {
+            console.log('missing env variable MELI_SECRET_KEY')
+        }
     };
 
     render(): any {
         return (
             <div className='home-feed'>
-                {/* TODO Search Results */}
-                <div className='center container'>
-                    <ul>
+                <div className='center container col-10'>
+                    <ul className="">
                         {this.state.items.map((listItem: Item) => (
                             <li key={listItem.id}>
                                 <Link to={`/items/${listItem.id}`}>
@@ -58,7 +63,6 @@ class HomeFeed extends React.Component<any, {
                             </li>
                         ))}
                     </ul>
-                    <SearchItemCard item={new Item('123', '123', '123123', 123123, 2, 'awedawd', 'new', 'yes')} />
                     <div className='horizontal-line center'></div>
                 </div>
             </div>

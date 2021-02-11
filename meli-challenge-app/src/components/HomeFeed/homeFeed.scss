@@ -1,20 +1,16 @@
 .home-feed{
-    background-color: gray;
-    min-height: calc(100vh - 50px);
-    padding-top: 50px;
-    .center{
-        margin: auto;
-        width: 90%;
-    }
-    .container{
-        background-color: white;
-        width: 90%;
-        max-width: 500px;
-        min-height: 250px;
-    }
     .horizontal-line {
         background-color: rgb(190, 190, 190);
         height: 2px;
         width: calc(100% - 30px);
+    }
+    ul{
+        list-style-type:none;
+        padding: 0;
+        margin: 0;
+    }
+    a{
+        text-decoration: none;
+        color: black;
     }
 }

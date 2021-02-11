@@ -2,7 +2,7 @@ import React from 'react';
 import './searchBar.scss';
 import logo from '../../assets/Logo_ML.png';
 import search from '../../assets/ic_Search.png';
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const PLACHOLDER = 'Nunca dejes de buscar';
 
@@ -16,7 +16,7 @@ class SearchBar extends React.Component<{}, { searchBoxValue: string }> {
     render(): any {
         return (
             <div className='search-bar'>
-                <div className='center'>
+                <div className='center col-10'>
                     <span className='helper'></span>
                     <img src={logo} className='logo' alt='logo' />
                     <input type='text' placeholder={PLACHOLDER} className='borderless-outlineless'
