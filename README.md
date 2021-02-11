@@ -23,7 +23,7 @@ npm i
 npm run start
 ```
 
-you mught need to use another port if the api is running in the same system
+you might need to use another port if the api is running in the same system
 
 ### To update models (Both API and App)
 
@@ -43,11 +43,10 @@ npm run update-models-mac
 
 ### Usability
 
-    - Clear variable/function names
-    - No commented code
-    - Reusable components
-    - Models package
-    - TODO: use react w/hooks
+    - Tab selector
+    - Enter on search bar and selecting items
+    - Responsive (Not fully)
+    - TODO: media queries for responsive
 
 ### SEO
 
@@ -65,6 +64,11 @@ npm run update-models-mac
     - React component structure for future compoennts
     - Scss common variables for future styles
     - Models package
+    - Clear variable/function names
+    - No commented code
+    - Reusable components
+    - Models package
+    - TODO: use react w/hooks
 
 ### Security
 
