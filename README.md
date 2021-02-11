@@ -4,7 +4,7 @@ Meli Challenge
 
 npm or yarn can be used
 
-## Run the api:
+## Run the api
 
 ```unix
 cd meli-challenge-api
@@ -12,7 +12,7 @@ npm i
 npm run start
 ```
 
-## Debug the api (with vs code):
+## Debug the api (with vs code)
 
 Go to debug section and just press on the green play arrow button for the configuration "Launch API".
 
