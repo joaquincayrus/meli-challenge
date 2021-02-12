@@ -1,3 +1,16 @@
+$pixels_46: 16px;
+$pixels_32: 32px;
+$pixels_28: 28px;
+$pixels_24: 24px;
+$pixels_16: 16px;
+$image_size: 680px;
+$yellow:#FFE600;
+$dark_gray:#333;
+$gray:#666;
+$light_gray:#999;
+$lighter_gray:#EEE;
+$blue:#3483FA;
+
 .card {
     min-height: 150px;
     margin: 20px;
@@ -5,16 +18,18 @@
         float: left;
         width: 100%;
         img {
-            width: 580px;
-            height: 580px;
+            width: $image_size;
+            height: $image_size;
             object-fit: contain;
             border-radius: 4px;
         }
         .price {
             font-size: 46px;
+            margin-bottom: $pixels_32;
         }   
         .title {
             font-size: 24px;
+            margin-bottom: $pixels_32;
         }
         .decimals {
             font-size: 10px;
@@ -23,10 +38,20 @@
             float:left;
         }
         .item-info-content{
-            float: left;
+            padding-top: $pixels_32;
+            .item-condition {
+                margin-bottom: $pixels_16;
+            }
         }
         .description-title{
             font-size: 28px;
+            margin-bottom: $pixels_32;
+        }
+        .description{
+            margin-bottom: $pixels_32;
+        }
+        button {
+            margin-right: $pixels_32;
         }
     }
 }

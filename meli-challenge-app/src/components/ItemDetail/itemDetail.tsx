@@ -22,6 +22,9 @@ class ItemDetail extends React.Component<any, { itemId: String, itemDetail: Item
                 .then(res => {
                     const result = res.data;
                     this.setState({ itemDetail: result });
+                }).catch(error => {
+                    alert(`Error getting item Details`);
+                    console.error(error);
                 })
         } else {
             console.log('missing env variable MELI_SECRET_KEY')
@@ -44,16 +47,18 @@ class ItemDetail extends React.Component<any, { itemId: String, itemDetail: Item
                 <div className="item-content">
                     <img src={this.state.itemDetail?.item?.picture} alt="item_picture" className="img-item" />
                     <div className="item-info-content">
-                        <p>{this.state.itemDetail?.item?.condition} - {this.state.itemDetail?.item.sold_quantity} vendidos</p>
-                        <p className="title">{this.state.itemDetail?.item?.title}</p>
-                        <p className="price">{this.state.itemDetail?.item?.price.amount}<span className="decimals">{
+                        <div className="item-condition">{() => {
+                            return (this.state.itemDetail?.item?.condition === 'new') ? "Nuevo" : "Usado";
+                        }} - {this.state.itemDetail?.item.sold_quantity} vendidos</div>
+                        <div className="title">{this.state.itemDetail?.item?.title}</div>
+                        <div className="price">{this.state.itemDetail?.item?.price.amount}<span className="decimals">{
                             this.getDecimales()
-                        }</span></p>
+                        }</span></div>
                         <button onClick={() => { alert('COMPRAR!') }}>Comprar</button>
                     </div>
                 </div>
-                <p>Descripción del producto</p>
-                <p>{this.state.itemDetail?.item?.description}</p>
+                <div>Descripción del producto</div>
+                <div>{this.state.itemDetail?.item?.description}</div>
             </div>
         );
     }

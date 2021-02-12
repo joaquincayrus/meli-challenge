@@ -44,6 +44,9 @@ class HomeFeed extends React.Component<any, {
                 .then(res => {
                     const result = res.data;
                     this.setState({ items: result.items, categories: result.categories, author: result.author });
+                }).catch(error => {
+                    alert(`Error getting items`);
+                    console.error(error);
                 })
         } else {
             console.log('missing env variable MELI_SECRET_KEY')

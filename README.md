@@ -58,6 +58,7 @@ npm run update-models-mac
     - light, as little and small libraries addded as posible
     - TODO: SSR
     - production build
+    - TODO: check for meli api optimizations
 
 ### Scalability
 
