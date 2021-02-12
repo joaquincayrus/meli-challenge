@@ -4,6 +4,19 @@ Meli Challenge
 
 npm or yarn can be used
 
+## Before Running API and APP
+
+create environmnet variables files:
+
+### API Example
+
+MELI_SERVICE_ENDPOINT=https://apiexample.com
+MELI_SECRET_KEY=meli_secret_pass_example
+
+### APP
+
+REACT_APP_MELI_SECRET_KEY=meli_secret_pass_example
+
 ## Run the api
 
 ```unix
