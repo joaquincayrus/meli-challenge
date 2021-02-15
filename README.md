@@ -6,14 +6,14 @@ npm or yarn can be used
 
 ## Before Running API and APP
 
-create environmnet variables files:
+create environmnet variables files for both API and React App:
 
-### API Example
+API Example
 
 MELI_SERVICE_ENDPOINT=https://apiexample.com
 MELI_SECRET_KEY=meli_secret_pass_example
 
-### APP
+APP
 
 REACT_APP_MELI_SECRET_KEY=meli_secret_pass_example
 
