@@ -87,5 +87,4 @@ npm run update-models-mac
 ### Security
 
     -Secret key encription between apps
-    -Environment variables no committed
-    -TODO: check query input from APP and API
+    -Environment variables no committed to git
