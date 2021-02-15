@@ -12,17 +12,13 @@ class HomeFeed extends React.Component<any, {
     author: {
         name: string,
         lastname: string
-    }
+    },
+    updateBreadCrumb: any
 }> {
 
     //{ item: Item, searchResults: Item[] }
     constructor(props: any) {
         super(props);
-        //TODO: 
-        // this.state = {
-        //     item: props.item,
-        //     searchResults: props.searchResults ? props.searchResults : [item]
-        // }
         const query = (new URLSearchParams(this.props.location.search)).get("search");
         if (query != null) {
             this.getItems(query);
@@ -33,7 +29,8 @@ class HomeFeed extends React.Component<any, {
             author: {
                 lastname: '',
                 name: ''
-            }
+            },
+            updateBreadCrumb: props.updateBreadCrumb
         }
     }
 
@@ -44,6 +41,7 @@ class HomeFeed extends React.Component<any, {
                 .then(res => {
                     const result = res.data;
                     this.setState({ items: result.items, categories: result.categories, author: result.author });
+                    this.state.updateBreadCrumb(result.categories)
                 }).catch(error => {
                     alert(`Error getting items`);
                     console.error(error);

@@ -4,7 +4,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch API",
+      "name": "Launch Meli API",
     //   "runtimeExecutable": "npm",
     //   "runtimeArgs": ["start"],
         "program": "${workspaceFolder}/meli-challenge-api/index.ts",

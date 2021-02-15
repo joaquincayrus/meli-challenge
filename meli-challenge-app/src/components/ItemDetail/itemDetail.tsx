@@ -5,12 +5,13 @@ import './itemDetail.scss';
 import crypto from 'crypto-js';
 const MELI_APP_FRONT = 'Meli App Front End';
 
-class ItemDetail extends React.Component<any, { itemId: String, itemDetail: ItemDetailModel | null }> {
-    constructor(props: { itemId: String, match: any }) {
+class ItemDetail extends React.Component<any, { itemId: String, itemDetail: ItemDetailModel | null, updateBreadCrumb: any }> {
+    constructor(props: { itemId: String, match: any, updateBreadCrumb: any }) {
         super(props);
         this.state = {
             itemId: props.match.params.id,
-            itemDetail: null
+            itemDetail: null,
+            updateBreadCrumb: props.updateBreadCrumb
         }
         this.getItemDetails()
     }
@@ -22,6 +23,7 @@ class ItemDetail extends React.Component<any, { itemId: String, itemDetail: Item
                 .then(res => {
                     const result = res.data;
                     this.setState({ itemDetail: result });
+                    this.state.updateBreadCrumb(result.breadCrumb);
                 }).catch(error => {
                     alert(`Error getting item Details`);
                     console.error(error);
@@ -41,24 +43,40 @@ class ItemDetail extends React.Component<any, { itemId: String, itemDetail: Item
         }
     }
 
+    getCondition = () => {
+        if (this.state.itemDetail?.item?.condition === 'new') {
+            return <span>Nuevo</span>;
+        } else {
+            return <span>Usado</span>;
+        };
+    }
+
+    getCurrency = () => {
+        if (this.state.itemDetail?.item?.price.currency === "ARS") {
+            return <span className="currency">$</span>;
+        }
+    }
+
     render(): any {
         return (
-            <div className='card center container col-10'>
-                <div className="item-content">
-                    <img src={this.state.itemDetail?.item?.picture} alt="item_picture" className="img-item" />
-                    <div className="item-info-content">
-                        <div className="item-condition">{() => {
-                            return (this.state.itemDetail?.item?.condition === 'new') ? "Nuevo" : "Usado";
-                        }} - {this.state.itemDetail?.item.sold_quantity} vendidos</div>
-                        <div className="title">{this.state.itemDetail?.item?.title}</div>
-                        <div className="price">{this.state.itemDetail?.item?.price.amount}<span className="decimals">{
-                            this.getDecimales()
-                        }</span></div>
-                        <button onClick={() => { alert('COMPRAR!') }}>Comprar</button>
+            <div className="center col-10">
+                <div className='card'>
+                    <div className="item-content">
+                        <img src={this.state.itemDetail?.item?.picture} alt="item_picture" className="img-item" />
+                        <div className="item-info-content">
+                            <div className="item-condition">{this.getCondition()} - {this.state.itemDetail?.item.sold_quantity} vendidos</div>
+                            <div className="title">{this.state.itemDetail?.item?.title}</div>
+                            <div className="price">{this.getCurrency()}{this.state.itemDetail?.item?.price.amount.toLocaleString('de-DE')}<span className="decimals">{
+                                this.getDecimales()
+                            }</span></div>
+                            <button onClick={() => { alert('COMPRAR!') }}>Comprar</button>
+                        </div>
+                    </div>
+                    <div className="description-title">Descripción del producto</div>
+                    <div className="description">
+                        <pre>{this.state.itemDetail?.item?.description}</pre>
                     </div>
                 </div>
-                <div>Descripción del producto</div>
-                <div>{this.state.itemDetail?.item?.description}</div>
             </div>
         );
     }

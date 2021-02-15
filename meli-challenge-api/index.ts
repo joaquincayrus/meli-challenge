@@ -53,16 +53,23 @@ app.post('/api/items', async (req: Request, res: Response) => {
         const ruta = `${process.env.MELI_SERVICE_ENDPOINT}`;
         result = await axios.post(`${process.env.MELI_SERVICE_ENDPOINT}sites/MLA/search?q=:query`,)
 
-        result.data.results.map((serverItem: any) => {
-            const meliItem = new Item(serverItem.id, serverItem.title, serverItem.currency_id,
-                serverItem.price, 2, serverItem.thumbnail, serverItem.condition, serverItem.shipping.free_shipping,
-                serverItem.address.state_name);
-            items.push(meliItem);
-        })
+        for (let i = 0; i < 4; i++) {
+            if (result.data.results[i] != undefined) {
+                const serverItem: any = result.data.results[i];
+                const meliItem = new Item(serverItem.id, serverItem.title, serverItem.currency_id,
+                    serverItem.price, 2, serverItem.thumbnail, serverItem.condition, serverItem.shipping.free_shipping,
+                    serverItem.address.state_name);
+                items.push(meliItem);
+            }
+        }
     }
-    //TODO: categories
-    let itemFeed = new ItemFeed([], items);
-    // res.setHeader('Content-Type', 'application/json');
+    const currentCategory = await axios.get(`${process.env.MELI_SERVICE_ENDPOINT}categories/${result.data.available_filters[0].values[0].id}`)
+    const breadCrumbs = currentCategory.data.path_from_root.map((category: any) => { return category.name });
+    let itemFeed = new ItemFeed([breadCrumbs[0],
+    breadCrumbs[1],
+    breadCrumbs[2],
+    breadCrumbs[3],
+    breadCrumbs[4]], items);
     res.json(itemFeed)
 })
 
@@ -75,12 +82,12 @@ app.get('/api/items/:id', async (req: Request, res: Response) => {
         const ruta = `${process.env.MELI_SERVICE_ENDPOINT}/${id}`;
         const itemPromise = axios.get(`${process.env.MELI_SERVICE_ENDPOINT}items/${id}`,);
         const itemDetailsPromise = axios.get(`${process.env.MELI_SERVICE_ENDPOINT}items/${id}/description`,);
-
         const [item, itemDescription] = await Promise.all([itemPromise, itemDetailsPromise]);
-
+        const currentCategory = await axios.get(`${process.env.MELI_SERVICE_ENDPOINT}categories/${item.data.category_id}`)
+        const breadCrumbs = currentCategory.data.path_from_root.map((category: any) => { return category.name });
         itemDetail = new ItemDetail(item.data.id, item.data.title, item.data.currency_id,
             item.data.price, 2, item.data.thumbnail, item.data.condition, item.data.shipping.free_shipping,
-            0, itemDescription.data.plain_text);
+            item.data.sold_quantity, itemDescription.data.plain_text, breadCrumbs);
         res.json(itemDetail)
     }
 })

@@ -2,7 +2,8 @@ import Price from './price';
 
 class ItemDetail {
     constructor(id: string, title: string, currency: string, amount: number, decimals: number,
-        picture: string, condition: string, free_shipping: boolean, sold_quantity: number, description: string) {
+        picture: string, condition: string, free_shipping: boolean, sold_quantity: number, description: string,
+        breadCrumb: string[]) {
         this.item = {
             id: id,
             title: title,
@@ -13,6 +14,7 @@ class ItemDetail {
             sold_quantity: sold_quantity,
             description: description
         }
+        this.breadCrumb = breadCrumb;
     }
     author = {
         name: "Joaquin",
@@ -32,6 +34,7 @@ class ItemDetail {
         sold_quantity: number,
         description: string
     };
+    breadCrumb: string[];
 }
 
 export default ItemDetail;

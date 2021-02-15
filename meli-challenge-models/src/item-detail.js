@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var price_1 = __importDefault(require("./price"));
 var ItemDetail = /** @class */ (function () {
-    function ItemDetail(id, title, currency, amount, decimals, picture, condition, free_shipping, sold_quantity, description) {
+    function ItemDetail(id, title, currency, amount, decimals, picture, condition, free_shipping, sold_quantity, description, breadCrumb) {
         this.author = {
             name: "Joaquin",
             lastname: "Cayrus"
@@ -20,6 +20,7 @@ var ItemDetail = /** @class */ (function () {
             sold_quantity: sold_quantity,
             description: description
         };
+        this.breadCrumb = breadCrumb;
     }
     return ItemDetail;
 }());

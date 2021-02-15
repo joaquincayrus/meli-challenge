@@ -77,7 +77,7 @@ app.get('/', function (_req, res) {
     res.send('Hello World');
 });
 app.post('/api/items', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, query, items, ruta, itemFeed;
+    var result, query, items, ruta, i, serverItem, meliItem, currentCategory, breadCrumbs, itemFeed;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -89,38 +89,51 @@ app.post('/api/items', function (req, res) { return __awaiter(void 0, void 0, vo
                 return [4 /*yield*/, axios.post(process.env.MELI_SERVICE_ENDPOINT + "sites/MLA/search?q=:query")];
             case 1:
                 result = _a.sent();
-                result.data.results.map(function (serverItem) {
-                    var meliItem = new Item(serverItem.id, serverItem.title, serverItem.currency_id, serverItem.price, 2, serverItem.thumbnail, serverItem.condition, serverItem.shipping.free_shipping, serverItem.address.state_name);
-                    items.push(meliItem);
-                });
+                for (i = 0; i < 4; i++) {
+                    if (result.data.results[i] != undefined) {
+                        serverItem = result.data.results[i];
+                        meliItem = new Item(serverItem.id, serverItem.title, serverItem.currency_id, serverItem.price, 2, serverItem.thumbnail, serverItem.condition, serverItem.shipping.free_shipping, serverItem.address.state_name);
+                        items.push(meliItem);
+                    }
+                }
                 _a.label = 2;
-            case 2:
-                itemFeed = new ItemFeed([], items);
-                // res.setHeader('Content-Type', 'application/json');
+            case 2: return [4 /*yield*/, axios.get(process.env.MELI_SERVICE_ENDPOINT + "categories/" + result.data.available_filters[0].values[0].id)];
+            case 3:
+                currentCategory = _a.sent();
+                breadCrumbs = currentCategory.data.path_from_root.map(function (category) { return category.name; });
+                itemFeed = new ItemFeed([breadCrumbs[0],
+                    breadCrumbs[1],
+                    breadCrumbs[2],
+                    breadCrumbs[3],
+                    breadCrumbs[4]], items);
                 res.json(itemFeed);
                 return [2 /*return*/];
         }
     });
 }); });
 app.get('/api/items/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, id, itemDetail, ruta, itemPromise, itemDetailsPromise, _a, item, itemDescription;
+    var result, id, itemDetail, ruta, itemPromise, itemDetailsPromise, _a, item, itemDescription, currentCategory, breadCrumbs;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 result = {};
                 id = req.params.id;
                 itemDetail = null;
-                if (!(id !== undefined)) return [3 /*break*/, 2];
+                if (!(id !== undefined)) return [3 /*break*/, 3];
                 ruta = process.env.MELI_SERVICE_ENDPOINT + "/" + id;
                 itemPromise = axios.get(process.env.MELI_SERVICE_ENDPOINT + "items/" + id);
                 itemDetailsPromise = axios.get(process.env.MELI_SERVICE_ENDPOINT + "items/" + id + "/description");
                 return [4 /*yield*/, Promise.all([itemPromise, itemDetailsPromise])];
             case 1:
                 _a = _b.sent(), item = _a[0], itemDescription = _a[1];
-                itemDetail = new ItemDetail(item.data.id, item.data.title, item.data.currency_id, item.data.price, 2, item.data.thumbnail, item.data.condition, item.data.shipping.free_shipping, 0, itemDescription.data.plain_text);
+                return [4 /*yield*/, axios.get(process.env.MELI_SERVICE_ENDPOINT + "categories/" + item.data.category_id)];
+            case 2:
+                currentCategory = _b.sent();
+                breadCrumbs = currentCategory.data.path_from_root.map(function (category) { return category.name; });
+                itemDetail = new ItemDetail(item.data.id, item.data.title, item.data.currency_id, item.data.price, 2, item.data.thumbnail, item.data.condition, item.data.shipping.free_shipping, 0, itemDescription.data.plain_text, breadCrumbs);
                 res.json(itemDetail);
-                _b.label = 2;
-            case 2: return [2 /*return*/];
+                _b.label = 3;
+            case 3: return [2 /*return*/];
         }
     });
 }); });

@@ -13,7 +13,8 @@ $blue:#3483FA;
 
 .card {
     min-height: 150px;
-    margin: 20px;
+    background-color: white;
+    padding: $pixels_32;
     .item-content{
         float: left;
         width: 100%;
@@ -24,15 +25,21 @@ $blue:#3483FA;
             border-radius: 4px;
         }
         .price {
+            .currency{
+                margin-right: 15px;
+            }
             font-size: 46px;
             margin-bottom: $pixels_32;
         }   
         .title {
             font-size: 24px;
             margin-bottom: $pixels_32;
+            font-weight: 600;
         }
         .decimals {
-            font-size: 10px;
+            font-size: 18px;
+            position: relative;
+            top: -20px;
         }
         .img-item{
             float:left;
@@ -43,15 +50,28 @@ $blue:#3483FA;
                 margin-bottom: $pixels_16;
             }
         }
-        .description-title{
-            font-size: 28px;
-            margin-bottom: $pixels_32;
-        }
-        .description{
-            margin-bottom: $pixels_32;
-        }
+        
         button {
             margin-right: $pixels_32;
+            padding: 10px;
+            width: 28%;
+            min-width: 120px;
+            color: white;
+            background-color: $blue;
+            border-radius: 4px;
+            border: none;
+            outline: none;
+        }
+    }
+    .description-title {
+        font-size: 28px;
+        margin-bottom: $pixels_32;
+    }
+    .description{
+        font-size: $pixels_16;
+        pre{
+            margin: 0;
+            padding: 0;
         }
     }
 }
