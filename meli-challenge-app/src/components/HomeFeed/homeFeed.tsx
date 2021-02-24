@@ -37,7 +37,7 @@ class HomeFeed extends React.Component<any, {
     getItems = (queryParam: string) => {
         if (process.env.REACT_APP_MELI_SECRET_KEY !== undefined) {
             const auth = crypto.AES.encrypt(MELI_APP_FRONT, process.env.REACT_APP_MELI_SECRET_KEY).toString();
-            axios.post(`http://localhost:3000/api/items?q=${queryParam}`, null, { headers: { authorization: auth } })
+            axios.post(`${process.env.REACT_APP_MELI_API_URL}/api/items?q=${queryParam}`, null, { headers: { authorization: auth } })
                 .then(res => {
                     const result = res.data;
                     this.setState({ items: result.items, categories: result.categories, author: result.author });

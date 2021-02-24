@@ -44,7 +44,7 @@ var meliChallengeModels = require('meli-challenge-models');
 var crypto = require('crypto-js');
 require('dotenv').config();
 var corsOptions = {
-    origin: 'http://localhost:3001',
+    origin: process.env.MELI_APP_URL,
     optionsSuccessStatus: 200 // For legacy browser support
 };
 var MELI_APP_FRONT = 'Meli App Front End';
@@ -130,7 +130,7 @@ app.get('/api/items/:id', function (req, res) { return __awaiter(void 0, void 0,
             case 2:
                 currentCategory = _b.sent();
                 breadCrumbs = currentCategory.data.path_from_root.map(function (category) { return category.name; });
-                itemDetail = new ItemDetail(item.data.id, item.data.title, item.data.currency_id, item.data.price, 2, item.data.thumbnail, item.data.condition, item.data.shipping.free_shipping, 0, itemDescription.data.plain_text, breadCrumbs);
+                itemDetail = new ItemDetail(item.data.id, item.data.title, item.data.currency_id, item.data.price, 2, item.data.thumbnail, item.data.condition, item.data.shipping.free_shipping, item.data.sold_quantity, itemDescription.data.plain_text, breadCrumbs);
                 res.json(itemDetail);
                 _b.label = 3;
             case 3: return [2 /*return*/];

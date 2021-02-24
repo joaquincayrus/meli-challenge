@@ -8,7 +8,7 @@ const crypto = require('crypto-js');
 require('dotenv').config()
 
 var corsOptions = {
-    origin: 'http://localhost:3001',
+    origin: process.env.MELI_APP_URL,
     optionsSuccessStatus: 200 // For legacy browser support
 }
 const MELI_APP_FRONT = 'Meli App Front End';

@@ -19,7 +19,7 @@ class ItemDetail extends React.Component<any, { itemId: String, itemDetail: Item
     getItemDetails = () => {
         if (process.env.REACT_APP_MELI_SECRET_KEY !== undefined) {
             const auth = crypto.AES.encrypt(MELI_APP_FRONT, process.env.REACT_APP_MELI_SECRET_KEY).toString();
-            axios.get(`http://localhost:3000/api/items/${this.state.itemId}`, { headers: { authorization: auth } })
+            axios.get(`${process.env.REACT_APP_MELI_API_URL}/api/items/${this.state.itemId}`, { headers: { authorization: auth } })
                 .then(res => {
                     const result = res.data;
                     this.setState({ itemDetail: result });

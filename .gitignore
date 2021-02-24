@@ -112,3 +112,5 @@ meli-challenge-models/src/item-feed.js
 /meli-challenge-models/src/price.js
 /meli-challenge-models/src/item-feed.js
 /meli-challenge-app/public
+# Local Netlify folder
+.netlify
