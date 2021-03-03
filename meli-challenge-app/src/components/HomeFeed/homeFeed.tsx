@@ -16,7 +16,6 @@ class HomeFeed extends React.Component<any, {
     updateBreadCrumb: any
 }> {
 
-    //{ item: Item, searchResults: Item[] }
     constructor(props: any) {
         super(props);
         const query = (new URLSearchParams(this.props.location.search)).get("search");
@@ -37,7 +36,8 @@ class HomeFeed extends React.Component<any, {
     getItems = (queryParam: string) => {
         if (process.env.REACT_APP_MELI_SECRET_KEY !== undefined) {
             const auth = crypto.AES.encrypt(MELI_APP_FRONT, process.env.REACT_APP_MELI_SECRET_KEY).toString();
-            axios.post(`${process.env.REACT_APP_MELI_API_URL}/api/items?q=${queryParam}`, null, { headers: { authorization: auth } })
+            const url = `${process.env.REACT_APP_MELI_API_URL}/api/items?q=${queryParam}`;
+            axios.post(url, null, { headers: { authorization: auth } })
                 .then(res => {
                     const result = res.data;
                     this.setState({ items: result.items, categories: result.categories, author: result.author });

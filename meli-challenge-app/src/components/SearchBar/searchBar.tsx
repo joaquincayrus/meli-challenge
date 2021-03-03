@@ -21,7 +21,6 @@ class SearchBar extends React.Component<{}, { searchBoxValue: string }> {
             <div className='search-bar'>
                 <div className='center col-10'>
                     <form >
-                        {/* onSubmit={this.onFormSubmit} */}
                         <span className='helper'></span>
                         <img src={logo} className='logo' alt='logo' />
                         <input type='text' placeholder={PLACHOLDER} className='borderless-outlineless'

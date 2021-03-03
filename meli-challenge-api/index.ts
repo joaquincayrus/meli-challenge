@@ -9,7 +9,7 @@ require('dotenv').config()
 
 var corsOptions = {
     origin: process.env.MELI_APP_URL,
-    optionsSuccessStatus: 200 // For legacy browser support
+    optionsSuccessStatus: 200
 }
 const MELI_APP_FRONT = 'Meli App Front End';
 
